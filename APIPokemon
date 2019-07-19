@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "9a519499-50d6-4a9e-9731-0f75cb0eacd6",
+		"name": "APIPokemon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET status 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f15f3bd-13c7-42f6-adfc-a0b1ce6df97e",
+						"exec": [
+							"function returnData(){",
+							"    let data = pm.response.json();",
+							"    return data;",
+							"}",
+							"",
+							"pm.test('Valida o status 200 para a requisição', function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Valida o nome do Pokemon', function(){",
+							"    let data = returnData();",
+							"    let valorOk = true;",
+							"    ",
+							"    if((data.name === \"charmander\") && (data.forms[0].url === \"https://pokeapi.co/api/v2/pokemon-form/4/\")){",
+							"        valorOk = true;",
+							"    } else {",
+							"        valorOk = false;",
+							"    }",
+							"    ",
+							"    pm.expect(valorOk).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/charmander",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"charmander"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET status 404 com pokemon invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43e412b3-7e14-4d19-a2da-7c3e6e45e84c",
+						"exec": [
+							"function returnData(){",
+							"    let data = pm.response.json();",
+							"    return data;",
+							"}",
+							"",
+							"pm.test('Validar retorno 404 da requisição' , function() {",
+							"    ",
+							"    pm.response.to.have.status(404);",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/chardsdd",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"chardsdd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
